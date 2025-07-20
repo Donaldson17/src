@@ -54,7 +54,7 @@ function GoalItem({ goal, onUpdate, onDelete, onDeposit }) {
           <h3>{goal.name}</h3>
           <p>Target: ${goal.targetAmount}</p>
           <p>Saved: ${goal.savedAmount}</p>
-          <p>Remaining: ${remainingAmount}</p>
+          <p>Remaining: ${remainingAmount}</p> 
           <ProgressBar progress={progress} />
           <p>Deadline: {goal.deadline} ({timeLeft} days left)</p>
           {status && <p className="status">{status}</p>}
