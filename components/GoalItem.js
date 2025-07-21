@@ -30,36 +30,49 @@ function GoalItem({ goal, onUpdate, onDelete, onDeposit }) {
   return (
     <div className={`goal-item ${status.toLowerCase().replace(' ', '-')}`}>
       {isEditing ? (
-        <div>
-          <input
-            type="text"
-            value={editedGoal.name}
-            onChange={(e) => setEditedGoal({...editedGoal, name: e.target.value})}
-          />
-          <input
-            type="number"
-            value={editedGoal.targetAmount}
-            onChange={(e) => setEditedGoal({...editedGoal, targetAmount: e.target.value})}
-          />
-          <input
-            type="date"
-            value={editedGoal.deadline}
-            onChange={(e) => setEditedGoal({...editedGoal, deadline: e.target.value})}
-          />
-          <button onClick={handleUpdate}>Save</button>
-          <button onClick={() => setIsEditing(false)}>Cancel</button>
+        <div className="edit-form">
+          <label>
+            Name:
+            <input
+              type="text"
+              value={editedGoal.name}
+              onChange={(e) => setEditedGoal({...editedGoal, name: e.target.value})}
+            />
+          </label>
+          <label>
+            Target Amount:
+            <input
+              type="number"
+              value={editedGoal.targetAmount}
+              onChange={(e) => setEditedGoal({...editedGoal, targetAmount: e.target.value})}
+            />
+          </label>
+          <label>
+            Deadline:
+            <input
+              type="date"
+              value={editedGoal.deadline}
+              onChange={(e) => setEditedGoal({...editedGoal, deadline: e.target.value})}
+            />
+          </label>
+          <div className="button-group">
+            <button onClick={handleUpdate}>Save</button>
+            <button onClick={() => setIsEditing(false)}>Cancel</button>
+          </div>
         </div>
       ) : (
-        <div>
+        <div className="goal-content">
           <h3>{goal.name}</h3>
-          <p>Target: ${goal.targetAmount}</p>
-          <p>Saved: ${goal.savedAmount}</p>
-          <p>Remaining: ${remainingAmount}</p> 
+          <p>Target: ${goal.targetAmount.toLocaleString()}</p>
+          <p>Saved: ${goal.savedAmount.toLocaleString()}</p>
+          <p>Remaining: ${remainingAmount.toLocaleString()}</p>
           <ProgressBar progress={progress} />
-          <p>Deadline: {goal.deadline} ({timeLeft} days left)</p>
+          <p>Deadline: {new Date(goal.deadline).toLocaleDateString()} ({timeLeft} days left)</p>
           {status && <p className="status">{status}</p>}
-          <button onClick={() => setIsEditing(true)}>Edit</button>
-          <button onClick={() => onDelete(goal.id)}>Delete</button>
+          <div className="button-group">
+            <button onClick={() => setIsEditing(true)}>Edit</button>
+            <button onClick={() => onDelete(goal.id)}>Delete</button>
+          </div>
           <DepositForm goalId={goal.id} onDeposit={onDeposit} />
         </div>
       )}

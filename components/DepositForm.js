@@ -12,14 +12,19 @@ function DepositForm({ goalId, onDeposit }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="number"
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-        placeholder="Deposit amount"
-      />
-      <button type="submit">Deposit</button>
+    <form onSubmit={handleSubmit} className="deposit-form">
+      <label>
+        Deposit Amount:
+        <input
+          type="number"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          placeholder="Enter amount"
+          min="1"
+          step="0.01"
+        />
+      </label>
+      <button type="submit">Add Deposit</button>
     </form>
   );
 }

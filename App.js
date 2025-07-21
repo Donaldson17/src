@@ -29,7 +29,11 @@ function App() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(newGoal),
+        body: JSON.stringify({
+          ...newGoal,
+          savedAmount: 0,
+          createdAt: new Date().toISOString().split('T')[0]
+        }),
       });
       const data = await response.json();
       setGoals([...goals, data]);
@@ -90,11 +94,11 @@ function App() {
     }
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div className="loading">Loading...</div>;
 
   return (
     <div className="app">
-      <h1>Smart Goal Planner</h1>
+      <h1>SMART Goal Planner</h1>
       <Overview goals={goals} />
       <GoalForm onAddGoal={addGoal} />
       <GoalList 

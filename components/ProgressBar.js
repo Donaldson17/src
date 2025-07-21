@@ -4,8 +4,9 @@ function ProgressBar({ progress }) {
       <div 
         className="progress-fill" 
         style={{ width: `${Math.min(progress, 100)}%` }}
-      ></div>
-      <span>{Math.round(progress)}%</span>
+      >
+        <span>{Math.round(progress)}%</span>
+      </div>
     </div>
   );
 }

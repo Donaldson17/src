@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const categories = [
-  'Travel', 'Emergency', 'Electronics', 'Real Estate', 
+  'Travel', 'Emergency', 'Electronics', 'Real Estate',
   'Vehicle', 'Education', 'Shopping', 'Retirement', 'Home'
 ];
 
@@ -16,10 +16,8 @@ function GoalForm({ onAddGoal }) {
     const newGoal = {
       name,
       targetAmount: Number(targetAmount),
-      savedAmount: 0,
       category,
       deadline,
-      createdAt: new Date().toISOString().split('T')[0]
     };
     onAddGoal(newGoal);
     setName('');
@@ -29,36 +27,49 @@ function GoalForm({ onAddGoal }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="goal-form">
       <h2>Add New Goal</h2>
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Goal name"
-        required
-      />
-      <input
-        type="number"
-        value={targetAmount}
-        onChange={(e) => setTargetAmount(e.target.value)}
-        placeholder="Target amount"
-        required
-        min="1"
-      />
-      <select value={category} onChange={(e) => setCategory(e.target.value)}>
-        {categories.map(cat => (
-          <option key={cat} value={cat}>{cat}</option>
-        ))}
-      </select>
-      <input
-        type="date"
-        value={deadline}
-        onChange={(e) => setDeadline(e.target.value)}
-        required
-        min={new Date().toISOString().split('T')[0]}
-      />
-      <button type="submit">Add Goal</button>
+      <label>
+        Goal Name:
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="e.g., Vacation Fund"
+          required
+        />
+      </label>
+      <label>
+        Target Amount ($):
+        <input
+          type="number"
+          value={targetAmount}
+          onChange={(e) => setTargetAmount(e.target.value)}
+          placeholder="1000"
+          required
+          min="1"
+          step="0.01"
+        />
+      </label>
+      <label>
+        Category:
+        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+          {categories.map(cat => (
+            <option key={cat} value={cat}>{cat}</option>
+          ))}
+        </select>
+      </label>
+      <label>
+        Deadline:
+        <input
+          type="date"
+          value={deadline}
+          onChange={(e) => setDeadline(e.target.value)}
+          required
+          min={new Date().toISOString().split('T')[0]}
+        />
+      </label>
+      <button type="submit">Create Goal</button>
     </form>
   );
 }

@@ -19,12 +19,29 @@ function Overview({ goals }) {
 
   return (
     <div className="overview">
-      <h2>Overview</h2>
-      <p>Total Goals: {totalGoals}</p>
-      <p>Total Saved: ${totalSaved}</p>
-      <p>Completed Goals: {completedGoals}</p>
-      <p>Approaching Deadlines: {approachingDeadlines}</p>
-      <p>Overdue Goals: {overdueGoals}</p>
+      <h2>Savings Overview</h2>
+      <div className="stats-grid">
+        <div className="stat-card">
+          <h3>Total Goals</h3>
+          <p>{totalGoals}</p>
+        </div>
+        <div className="stat-card">
+          <h3>Total Saved</h3>
+          <p>${totalSaved.toLocaleString()}</p>
+        </div>
+        <div className="stat-card">
+          <h3>Completed</h3>
+          <p>{completedGoals}</p>
+        </div>
+        <div className="stat-card">
+          <h3>Approaching</h3>
+          <p>{approachingDeadlines}</p>
+        </div>
+        <div className="stat-card">
+          <h3>Overdue</h3>
+          <p>{overdueGoals}</p>
+        </div>
+      </div>
     </div>
   );
 }
